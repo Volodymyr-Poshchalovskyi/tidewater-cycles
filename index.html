@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tidewater Cycles — Bike Rentals in Monterey, CA</title>
+  <meta name="description" content="Rent cruisers, road bikes, e-bikes and mountain bikes on Cannery Row. Book online, pick up in five minutes, ride the coast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%279%27 cy=%2721%27 r=%276%27 fill=%27none%27 stroke=%27%23e8743b%27 stroke-width=%273%27/%3E%3Ccircle cx=%2723%27 cy=%2721%27 r=%276%27 fill=%27none%27 stroke=%27%23e8743b%27 stroke-width=%273%27/%3E%3Cpath d=%27M9 21l5-10h7l2 10%27 fill=%27none%27 stroke=%27%230f1f33%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Tidewater Cycles home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="9" cy="21" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="23" cy="21" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M9 21l5-10h7l2 10M14 11l9 10M18 8h5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Tidewater <em>Cycles</em></span>
+    </a>
+    <nav class="site-nav" id="nav">
+      <a href="#fleet">Fleet</a>
+      <a href="#how">How it works</a>
+      <a href="#routes">Routes</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary btn-sm" href="#book">Book a bike</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="hero" id="book">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Cannery Row · Monterey, California</p>
+          <h1>The coast is better at twelve miles an hour.</h1>
+          <p class="lead">Cruisers, road bikes, e-bikes and hardtails, tuned every morning. Book online, pick up in five minutes, and be on the Rec Trail before the fog lifts.</p>
+          <ul class="hero-points">
+            <li>Helmet, lock and map included</li>
+            <li>Free cancellation up to 24 hours before</li>
+            <li>15% off rentals of 7 days or more</li>
+          </ul>
+        </div>
+
+        <div class="booking-card">
+          <form id="bookingForm" novalidate>
+            <h2 class="card-title">Check availability</h2>
+            <div class="field">
+              <label for="bikeSelect">Bike</label>
+              <select id="bikeSelect" name="bike" required>
+                <option value="">Loading fleet…</option>
+              </select>
+              <p class="field-error" data-for="bike"></p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="fromDate">Pickup</label>
+                <input type="date" id="fromDate" name="from" required>
+                <p class="field-error" data-for="from"></p>
+              </div>
+              <div class="field">
+                <label for="toDate">Return</label>
+                <input type="date" id="toDate" name="to" required>
+                <p class="field-error" data-for="to"></p>
+              </div>
+            </div>
+
+            <div id="quote" class="quote" aria-live="polite"></div>
+
+            <div id="customerFields" class="customer-fields" hidden>
+              <div class="field">
+                <label for="nameInput">Full name</label>
+                <input type="text" id="nameInput" name="name" autocomplete="name" placeholder="Jordan Rivera">
+                <p class="field-error" data-for="name"></p>
+              </div>
+              <div class="field">
+                <label for="emailInput">Email</label>
+                <input type="email" id="emailInput" name="email" autocomplete="email" placeholder="you@example.com">
+                <p class="field-error" data-for="email"></p>
+              </div>
+              <div class="field">
+                <label for="phoneInput">Phone <span class="optional">optional</span></label>
+                <input type="tel" id="phoneInput" name="phone" autocomplete="tel" placeholder="(831) 555-0100">
+                <p class="field-error" data-for="phone"></p>
+              </div>
+            </div>
+
+            <button id="submitBtn" type="submit" class="btn btn-primary btn-block">Check availability</button>
+            <p class="card-note">No payment now. Pay at pickup, card or cash.</p>
+          </form>
+
+          <div id="confirmation" class="confirmation" hidden></div>
+          <div id="myBookings" class="my-bookings" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fleet">
+      <div class="section-head">
+        <p class="eyebrow">The fleet</p>
+        <h2>Six bikes. One for every kind of day.</h2>
+        <p class="section-lead">Every bike gets a safety check before it leaves the shop. Prices are per day and include a helmet, a U-lock and a paper map you will probably ignore.</p>
+      </div>
+      <div id="fleetGrid" class="fleet-grid" aria-busy="true">
+        <article class="bike-card skeleton"></article>
+        <article class="bike-card skeleton"></article>
+        <article class="bike-card skeleton"></article>
+        <article class="bike-card skeleton"></article>
+        <article class="bike-card skeleton"></article>
+        <article class="bike-card skeleton"></article>
+      </div>
+      <div id="fleetError" class="state-box" hidden>
+        <p>We could not load the fleet right now.</p>
+        <button id="fleetRetry" class="btn btn-ghost">Try again</button>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="how">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2>Five minutes from browser to bike.</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Pick a bike and your dates</h3>
+          <p>See the price instantly. Seven days or more gets you 15% off automatically.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Reserve with just your name</h3>
+          <p>No card needed. We send a reference number and hold the bike for you.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Show up, get fitted, ride</h3>
+          <p>We set the saddle, hand you a helmet and point you at the water.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section" id="routes">
+      <div class="section-head">
+        <p class="eyebrow">Routes we love</p>
+        <h2>Where to point the front wheel.</h2>
+      </div>
+      <div class="routes-grid">
+        <article class="route-card">
+          <img src="https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=900&q=80&fm=jpg&fit=crop" alt="Coastal path with ocean and sky" loading="lazy">
+          <div class="route-body">
+            <div class="route-meta"><span>8 mi round trip</span><span class="pill pill-easy">Easy</span></div>
+            <h3>Rec Trail to Lovers Point</h3>
+            <p>Flat, paved and car-free. Sea otters on the left, taffy shops on the right. Best on a cruiser.</p>
+          </div>
+        </article>
+        <article class="route-card">
+          <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=900&q=80&fm=jpg&fit=crop" alt="Aerial view of waves meeting a sandy shore" loading="lazy">
+          <div class="route-body">
+            <div class="route-meta"><span>17 mi loop</span><span class="pill pill-mod">Moderate</span></div>
+            <h3>17-Mile Drive</h3>
+            <p>Cypress trees, Pebble Beach and a few rolling climbs. Bikes get in free; cars pay. We think that is fair.</p>
+          </div>
+        </article>
+        <article class="route-card">
+          <img src="https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?w=900&q=80&fm=jpg&fit=crop" alt="Cyclist riding a winding forest road" loading="lazy">
+          <div class="route-body"><div class="route-meta"><span>12–30 mi</span><span class="pill pill-hard">Hard</span></div>
+            <h3>Fort Ord singletrack</h3>
+            <p>Eighty miles of trail in the hills above the bay. Take the hardtail, take water, and tell us which loop you did.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-alt reviews">
+      <div class="section-head">
+        <p class="eyebrow">Riders say</p>
+        <h2>Three out of three would ride again.</h2>
+      </div>
+      <div class="reviews-grid">
+        <blockquote>
+          <p>“Booked at breakfast, on the bike by ten. They adjusted the saddle without me asking and the e-bike made the hill to Pacific Grove disappear.”</p>
+          <footer>Priya S. · Volt E-Cruiser, 2 days</footer>
+        </blockquote>
+        <blockquote>
+          <p>“The road bike was properly set up, not a rental-shop afterthought. Did 17-Mile Drive and Highway 1 to Carmel Highlands in one go.”</p>
+          <footer>Marcus T. · Pacific Road, 1 day</footer>
+        </blockquote>
+        <blockquote>
+          <p>“We took two cruisers for a week with the kids. The weekly discount showed up on its own and nobody tried to upsell us a thing.”</p>
+          <footer>The Okafor family · Coast Cruisers, 7 days</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="section-head">
+        <p class="eyebrow">FAQ</p>
+        <h2>Things people ask at the counter.</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Do I need to pay when I book?</summary>
+          <p>No. Reserving holds the bike. You pay at pickup with card or cash, and you can cancel free up to 24 hours before.</p>
+        </details>
+        <details>
+          <summary>What is included with the rental?</summary>
+          <p>A helmet, a U-lock, a bell, a paper map and a flat-repair kit. E-bikes come fully charged with a charger if you keep it overnight.</p>
+        </details>
+        <details>
+          <summary>What are your hours?</summary>
+          <p>Daily 8 am to 6 pm, March through October. 9 am to 5 pm the rest of the year. Returns after hours go in the coded bike room; we will text you the code.</p>
+        </details>
+        <details>
+          <summary>Can kids ride?</summary>
+          <p>Yes. We have kids' bikes from 20" wheels, trailers and tag-alongs. They are not bookable online yet, so call us and we will set them aside.</p>
+        </details>
+        <details>
+          <summary>What if it rains?</summary>
+          <p>It mostly does not. If it does, cancel for free or swap your dates. Fog does not count as rain.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Tidewater Cycles</p>
+        <p>412 Cannery Row<br>Monterey, CA 93940</p>
+      </div>
+      <div>
+        <p class="footer-label">Hours</p>
+        <p>Daily 8 am – 6 pm<br>Mar – Oct</p>
+      </div>
+      <div>
+        <p class="footer-label">Contact</p>
+        <p><a href="tel:+18315550142">(831) 555-0142</a><br><a href="mailto:hello@tidewatercycles.example">hello@tidewatercycles.example</a></p>
+      </div>
+    </div>
+    <p class="footer-fine">Fictional shop built as a portfolio project. Photos from Unsplash.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="script.js"></script>
+</body>
+</html>

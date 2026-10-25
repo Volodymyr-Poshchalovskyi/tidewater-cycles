@@ -1,0 +1,14 @@
+{
+  "name": "tidewater-cycles",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bike rental demo: static front end plus Vercel serverless functions for availability quotes and bookings.",
+  "scripts": {
+    "dev": "node dev-server.mjs . 3001",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
